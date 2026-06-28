@@ -22,7 +22,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 import spacy
@@ -193,6 +193,10 @@ def export_pdf(req: ExportRequest, request: Request):
 # Must be mounted AFTER all API routes so /analyze and /export-pdf
 # are matched first.
 
-_frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend", "html")
+@app.get("/")
+def redirect_to_app():
+    return RedirectResponse(url="/frontend/html/login.html")
+
+_frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend")
 if os.path.isdir(_frontend_dir):
-    app.mount("/", StaticFiles(directory=_frontend_dir, html=True), name="frontend")
+    app.mount("/frontend", StaticFiles(directory=_frontend_dir), name="frontend")
