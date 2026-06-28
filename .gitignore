@@ -1,0 +1,19 @@
+# Virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Mac
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Local data (if any)
+*.pdf
+dummy.pdf

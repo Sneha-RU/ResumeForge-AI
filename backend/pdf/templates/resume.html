@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+/* ── Page setup ─────────────────────────────────────────── */
+@page {
+  size: letter;
+  margin: 0.60in 0.72in 0.60in 0.72in;
+}
+
+/* ── Reset ──────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Arial", "Helvetica Neue", sans-serif;
+  font-size: 10.5pt;
+  color: #111;
+  line-height: 1.35;
+}
+
+/* ── Name / header ──────────────────────────────────────── */
+.name {
+  font-size: 22pt;
+  font-variant: small-caps;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 4pt;
+}
+
+.contact {
+  text-align: center;
+  font-size: 9.5pt;
+  color: #333;
+  margin-bottom: 10pt;
+}
+
+.contact a { color: #333; text-decoration: none; }
+.contact span { margin: 0 5pt; }
+
+/* ── Section heading ────────────────────────────────────── */
+.section-title {
+  font-size: 11pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4pt;
+  border-bottom: 0.75pt solid #111;
+  padding-bottom: 1.5pt;
+  margin-top: 9pt;
+  margin-bottom: 4pt;
+}
+
+/* ── Two-column row (name + date) ───────────────────────── */
+.row {
+  display: table;
+  width: 100%;
+  margin-bottom: 1pt;
+}
+.row-left  { display: table-cell; text-align: left;  }
+.row-right { display: table-cell; text-align: right; font-size: 9.5pt; color: #333; white-space: nowrap; padding-left: 8pt; }
+
+.entry-title   { font-weight: bold; font-size: 10.5pt; }
+.entry-sub     { font-style: italic; font-size: 9.5pt; color: #333; }
+
+/* ── Bullet list ────────────────────────────────────────── */
+ul.bullets {
+  list-style-type: none;
+  padding-left: 10pt;
+  margin-top: 2pt;
+  margin-bottom: 3pt;
+}
+ul.bullets li {
+  position: relative;
+  padding-left: 8pt;
+  margin-bottom: 1.5pt;
+  font-size: 9.8pt;
+  line-height: 1.4;
+}
+ul.bullets li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+}
+
+/* ── Skills table ───────────────────────────────────────── */
+.skill-row { margin-bottom: 1.5pt; font-size: 9.8pt; }
+.skill-label { font-weight: bold; }
+
+/* ── Project title row ──────────────────────────────────── */
+.proj-title { font-weight: bold; }
+.proj-tech  { font-style: italic; font-size: 9.5pt; }
+
+/* ── Project links ──────────────────────────────────────── */
+.proj-links { font-size: 9pt; color: #1a5fa8; }
+.proj-links a { color: #1a5fa8; text-decoration: underline; }
+
+/* ── Keep sections together where possible ──────────────── */
+.entry { page-break-inside: avoid; margin-bottom: 4pt; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ───────────────────────────────────────────── -->
+<div class="name">{{ personal.name }}</div>
+<div class="contact">
+  {% if personal.email %}
+    <span>✉ <a href="mailto:{{ personal.email }}">{{ personal.email }}</a></span>
+  {% endif %}
+  {% if personal.phone %}
+    <span>{{ personal.phone }}</span>
+  {% endif %}
+  {% if personal.linkedin %}
+    <span><a href="https://{{ personal.linkedin }}">{{ personal.linkedin }}</a></span>
+  {% endif %}
+  {% if personal.github %}
+    <span><a href="https://{{ personal.github }}">{{ personal.github }}</a></span>
+  {% endif %}
+</div>
+
+<!-- ── EDUCATION ────────────────────────────────────────── -->
+{% if education.institution %}
+<div class="section-title">Education</div>
+<div class="entry">
+  <div class="row">
+    <div class="row-left">
+      <span class="entry-title">{{ education.institution }}</span>
+    </div>
+    <div class="row-right">{{ education.location }}</div>
+  </div>
+  <div class="row">
+    <div class="row-left">
+      <span class="entry-sub">{{ education.degree }}{% if education.gpa %} &nbsp;&#8212;&nbsp; <strong>GPA: {{ education.gpa }}</strong>{% endif %}</span>
+    </div>
+    <div class="row-right">{{ education.graduation }}</div>
+  </div>
+  {% if education.coursework %}
+  <ul class="bullets">
+    <li><strong>Relevant Coursework:</strong> {{ education.coursework }}</li>
+  </ul>
+  {% endif %}
+  {% if education.achievement %}
+  <ul class="bullets">
+    <li><strong>Achievement:</strong> {{ education.achievement }}</li>
+  </ul>
+  {% endif %}
+</div>
+{% endif %}
+
+<!-- ── TECHNICAL SKILLS ─────────────────────────────────── -->
+{% if skills %}
+<div class="section-title">Technical Skills</div>
+<div class="entry">
+  {% for sg in skills %}
+  <div class="skill-row">
+    <span class="skill-label">{{ sg.name }}:</span>
+    {{ sg.content }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- ── EXPERIENCE ───────────────────────────────────────── -->
+{% if experience %}
+<div class="section-title">Experience</div>
+{% for job in experience %}
+<div class="entry">
+  <div class="row">
+    <div class="row-left">
+      <span class="entry-title">{{ job.company }}</span>
+      {% if job.company_note %}
+        <span class="entry-sub"> ({{ job.company_note }})</span>
+      {% endif %}
+    </div>
+    <div class="row-right">{{ job.location }}</div>
+  </div>
+  <div class="row">
+    <div class="row-left">
+      <span class="entry-sub">{{ job.title }}</span>
+    </div>
+    <div class="row-right">{{ job.period }}</div>
+  </div>
+  {% if job.bullets %}
+  <ul class="bullets">
+    {% for b in job.bullets %}
+    <li>{{ b }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- ── PROJECTS ─────────────────────────────────────────── -->
+{% if projects %}
+<div class="section-title">Projects</div>
+{% for proj in projects %}
+<div class="entry">
+  <div class="row">
+    <div class="row-left">
+      <span class="proj-title">{{ proj.name }}</span>
+      {% if proj.tech %}
+        <span class="proj-tech"> | {{ proj.tech }}</span>
+      {% endif %}
+    </div>
+    <div class="row-right">{{ proj.period }}</div>
+  </div>
+  {% if proj.bullets %}
+  <ul class="bullets">
+    {% for b in proj.bullets %}
+    <li>{{ b }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if proj.links %}
+  <div class="proj-links" style="padding-left:10pt; margin-top:1pt;">
+    {% for lnk in proj.links %}
+      <a href="{{ lnk.href }}">{{ lnk.label }}</a>{% if not loop.last %} &nbsp;|&nbsp; {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- ── ACHIEVEMENTS ─────────────────────────────────────── -->
+{% if achievements %}
+<div class="section-title">Achievements &amp; Extracurriculars</div>
+{% for item in achievements %}
+<div class="entry">
+  <div class="row">
+    <div class="row-left">
+      <span class="entry-title">{{ item.title }}</span>
+      {% if item.subtitle %}
+        <span class="entry-sub"> | {{ item.subtitle }}</span>
+      {% endif %}
+    </div>
+    <div class="row-right">{{ item.period }}</div>
+  </div>
+  {% if item.bullets %}
+  <ul class="bullets">
+    {% for b in item.bullets %}
+    <li>{{ b }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+/* ─── Variables & Base ─────────────────────────────────────────────── */
+:root {
+  --primary: #121312; 
+  --primary-hover: #2a2c2a;
+  --dark-bg: #121312;
+  --bg-color: #f6f7f6; 
+  --surface: #ffffff;
+  --text-primary: #121312;
+  --text-secondary: #747672;
+  --border-color: rgba(18, 19, 18, 0.08); 
+  --box-shadow-soft: 0 12px 36px rgba(18, 19, 18, 0.03), 0 2px 8px rgba(18, 19, 18, 0.02);
+  --box-shadow-hover: 0 20px 48px rgba(18, 19, 18, 0.06), 0 8px 16px rgba(18, 19, 18, 0.03);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body { 
+  margin: 0; 
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -10vw;
+  left: 10vw;
+  width: 80vw;
+  height: 80vw;
+  background: radial-gradient(circle, rgba(230,245,180,0.5) 0%, rgba(255,255,255,0) 65%);
+  filter: blur(60px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─── Navbar ────────────────────────────────────────────────────── */
+.rf-navbar { 
+  background: rgba(246, 247, 246, 0.85) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 16px rgba(18, 19, 18, 0.04) !important;
+  height: 60px;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+  transition: all 0.3s ease;
+  color: var(--text-primary) !important;
+}
+
+.rf-navbar .navbar-brand {
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+  color: var(--text-primary) !important;
+}
+
+.rf-ai-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  background-color: rgba(230,245,180,1);
+  color: var(--primary);
+  padding: 2px 6px; border-radius: 6px;
+  vertical-align: middle;
+  border: 1px solid rgba(230,245,180,1);
+}
+
+/* ─── Three-panel layout ────────────────────────────────────────── */
+.rf-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+/* ─── Form panel (left) ─────────────────────────────────────────── */
+.rf-form-panel {
+  overflow-y: auto;
+  padding: 14px 12px;
+  background: var(--surface);
+  border-right: 1px solid var(--border-color);
+}
+.rf-section-header {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .6px; 
+  color: var(--text-primary);
+  border-bottom: 1.5px solid var(--primary);
+  padding-bottom: 3px; margin: 16px 0 8px;
+}
+.rf-section-header:first-child { margin-top: 0; }
+
+/* Form controls styling */
+.form-control {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  box-shadow: none;
+  transition: all 0.3s;
+  color: var(--text-primary);
+}
+.form-control:focus {
+  background-color: var(--surface);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+  outline: none;
+}
+
+/* Cards for repeatable items */
+.rf-job, .rf-project, .rf-achievement, .rf-skill-group {
+  background: var(--bg-color);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+}
+.rf-job:hover, .rf-project:hover, .rf-achievement:hover, .rf-skill-group:hover {
+  background: var(--surface);
+  border-color: var(--border-color);
+  box-shadow: var(--box-shadow-soft);
+}
+.rf-skill-group {
+  padding: 8px;
+}
+
+/* ─── Preview panel (centre) ────────────────────────────────────── */
+.rf-preview-panel {
+  overflow-y: auto;
+  background: transparent;
+  display: flex; flex-direction: column;
+}
+.rf-preview-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(246, 247, 246, 0.85); 
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--text-secondary); padding: 8px 16px;
+}
+.rf-preview-body {
+  flex: 1; padding: 20px;
+  display: flex; justify-content: center;
+}
+
+/* ── XSLT preview document ─────────────────────────────────────── */
+.rf-preview-doc {
+  background: #fff;
+  width: 680px; max-width: 100%;
+  padding: 36px 44px;
+  box-shadow: var(--box-shadow-soft);
+  border-radius: 12px;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 10pt;
+  color: #111;
+  line-height: 1.35;
+  border: 1px solid var(--border-color);
+}
+.rfp-header { margin-bottom: 10px; text-align: center; }
+.rfp-name { font-size: 22pt; font-variant: small-caps; margin: 0 0 4px; }
+.rfp-contact { font-size: 9pt; color: #444; }
+.rfp-contact span { margin: 0 6px; }
+.rfp-contact a { color: var(--primary); text-decoration: none; font-weight: 500; }
+
+.rfp-section { margin-top: 10px; }
+.rfp-section-title {
+  font-size: 10.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .3pt;
+  border-bottom: .75pt solid #111;
+  padding-bottom: 1pt; margin-bottom: 4pt;
+}
+.rfp-entry { margin-bottom: 5pt; }
+.rfp-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1pt; }
+.rfp-right { font-size: 9pt; color: #444; white-space: nowrap; padding-left: 8px; }
+.rfp-period { font-style: italic; }
+.rfp-tech { font-size: 9pt; color: #555; }
+
+.rfp-bullets {
+  list-style: none; padding-left: 10pt; margin: 2pt 0 3pt;
+}
+.rfp-bullets li {
+  position: relative; padding-left: 8pt;
+  margin-bottom: 1.5pt; font-size: 9.5pt; line-height: 1.4;
+}
+.rfp-bullets li::before { content: "–"; position: absolute; left: 0; }
+
+.rfp-skill-row { font-size: 9.5pt; margin-bottom: 1.5pt; }
+.rfp-links { font-size: 9pt; color: var(--primary); padding-left: 10pt; margin-top: 1pt; }
+.rfp-links a { color: var(--primary); font-weight: 500; }
+
+/* ─── ATS panel (right) ─────────────────────────────────────────── */
+.rf-ats-panel {
+  overflow-y: auto;
+  background: var(--surface);
+  border-left: 1px solid var(--border-color);
+  display: flex; flex-direction: column;
+}
+.rf-jd-textarea {
+  font-size: 12px; resize: vertical;
+}
+.rf-analyse-btn {
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
+  color: white;
+  border-radius: 98px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.rf-analyse-btn:hover { 
+  background-color: white;
+  color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ── ATS result elements ───────────────────────────────────────── */
+.ats-panel { font-size: 12px; }
+.ats-placeholder, .ats-loading, .ats-error {
+  padding: 20px 10px; text-align: center; color: var(--text-secondary); font-size: 12px;
+}
+.ats-error { color: #791F1F; background: #FCEBEB; border-radius: 12px; padding: 10px; }
+.ats-spinner {
+  width: 28px; height: 28px;
+  border: 3px solid var(--border-color); border-top-color: var(--primary);
+  border-radius: 50%; animation: spin .7s linear infinite;
+  margin: 0 auto 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Score gauge ───────────────────────────────────────────────── */
+.ats-gauge-row { display: flex; align-items: center; gap: 12px; padding: 10px 4px 6px; }
+.ats-gauge { width: 80px; flex-shrink: 0; }
+.ats-circle-svg { display: block; width: 100%; }
+.ats-circle-bg {
+  fill: none; stroke: var(--border-color); stroke-width: 3.8;
+}
+.ats-circle-fill {
+  fill: none; stroke-width: 3.8;
+  stroke-linecap: round;
+  transform: rotate(-90deg); transform-origin: 50% 50%;
+  transition: stroke-dasharray .6s ease;
+}
+.ats-score-text {
+  font-size: 8px; font-weight: 700; fill: var(--text-primary);
+  text-anchor: middle; dominant-baseline: central;
+}
+.ats-grade-block { flex: 1; }
+.ats-grade-badge {
+  display: inline-block; font-size: 13px; font-weight: 700;
+  padding: 3px 10px; border-radius: 8px; margin-bottom: 4px;
+}
+.ats-suggestion { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+
+/* ── Keyword sections ──────────────────────────────────────────── */
+.ats-kw-section { padding: 6px 4px; border-top: 1px solid var(--border-color); }
+.ats-kw-label   { font-size: 11px; font-weight: 600; margin-bottom: 5px; color: var(--text-primary); }
+.ats-kw-matched { color: var(--text-primary); }
+.ats-kw-missing { color: #791F1F; }
+.ats-kw-wrap    { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.kw-badge {
+  display: inline-block; font-size: 10px; font-weight: 500;
+  padding: 2px 7px; border-radius: 10px;
+}
+.kw-green { background: rgba(230,245,180,1); color: var(--primary); }
+.kw-red   { background: #FCEBEB; color: #791F1F; }
+
+/* ─── Export button & status ────────────────────────────────────── */
+.rf-export-btn {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 98px;
+  font-size: 12px; font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s;
+}
+.rf-export-btn:hover { 
+  background-color: var(--bg-color);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.rf-export-btn:disabled { opacity: .6; }
+.export-status { font-size: 12px; }
+.export-success { color: var(--primary); }
+.export-error   { color: #791F1F; }
+.export-loading { color: var(--text-secondary); }
+
+/* ─── Utility ───────────────────────────────────────────────────── */
+.btn-xs { font-size: 11px; padding: 2px 8px; border-radius: 98px; }
+.rf-add-btn { 
+  background: var(--surface); color: var(--text-primary); border: 1px solid var(--border-color); font-size: 11px; transition: all 0.3s;
+}
+.rf-add-btn:hover { background: var(--surface); color: var(--primary); border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.rf-bullet-row textarea { font-size: 12px; }
+
+/* Buttons */
+.btn-outline-danger.rf-remove-btn {
+  border-radius: 98px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  background: var(--surface);
+  transition: all 0.2s;
+}
+.btn-outline-danger.rf-remove-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+/* ─── Responsive: stack on narrow screens ───────────────────────── */
+@media (max-width: 900px) {
+  .rf-layout { grid-template-columns: 1fr; height: auto; }
+  .rf-ats-panel { border-left: none; border-top: 1px solid var(--border-color); }
+  .rf-preview-doc { width: 100%; padding: 20px; }
+}

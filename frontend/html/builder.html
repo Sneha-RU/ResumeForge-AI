@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ResumeForge AI</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<!-- ── Top bar ─────────────────────────────────────────────────────── -->
+<nav class="navbar navbar-light rf-navbar px-3">
+  <a href="index.html" class="navbar-brand fw-bold text-decoration-none">ResumeForge <span class="rf-ai-badge">AI</span></a>
+  <div class="d-flex align-items-center gap-3">
+    <span id="auto-sync-status" class="export-status text-secondary small fw-semibold me-2"></span>
+    <button id="rf-save-btn" class="btn btn-sm rf-export-btn me-2">Save Resume</button>
+    <a href="ats.html" class="btn btn-sm btn-outline-secondary">Check ATS Score</a>
+    <button id="rf-export-btn" class="btn btn-sm rf-export-btn">↓ Download PDF</button>
+    <a href="index.html" class="text-secondary text-decoration-none small fw-semibold ms-2">← Back</a>
+  </div>
+</nav>
+
+<!-- ── Three-panel layout ──────────────────────────────────────────── -->
+<div class="rf-layout">
+
+  <!-- ── LEFT: Builder form ───────────────────────────────────────── -->
+  <aside class="rf-form-panel">
+    <form id="rf-form" autocomplete="off">
+
+      <!-- PERSONAL -->
+      <div class="rf-section-header">Personal</div>
+      <div class="row g-2 mb-3">
+        <div class="col-12">
+          <input id="rf-name"     class="form-control form-control-sm" placeholder="Full name"/>
+        </div>
+        <div class="col-6">
+          <input id="rf-email"    class="form-control form-control-sm" placeholder="Email"/>
+        </div>
+        <div class="col-6">
+          <input id="rf-phone"    class="form-control form-control-sm" placeholder="Phone"/>
+        </div>
+        <div class="col-6">
+          <input id="rf-linkedin" class="form-control form-control-sm" placeholder="LinkedIn URL"/>
+        </div>
+        <div class="col-6">
+          <input id="rf-github"   class="form-control form-control-sm" placeholder="GitHub URL"/>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="rf-section-header">Education</div>
+      <div class="row g-2 mb-3">
+        <div class="col-12">
+          <input id="rf-institution" class="form-control form-control-sm" placeholder="Institution name"/>
+        </div>
+        <div class="col-12">
+          <input id="rf-degree"      class="form-control form-control-sm" placeholder="Degree (e.g. B.Tech — Computer Science)"/>
+        </div>
+        <div class="col-4">
+          <input id="rf-gpa"         class="form-control form-control-sm" placeholder="GPA"/>
+        </div>
+        <div class="col-4">
+          <input id="rf-edu-location" class="form-control form-control-sm" placeholder="City, Country"/>
+        </div>
+        <div class="col-4">
+          <input id="rf-graduation"  class="form-control form-control-sm" placeholder="Graduation date"/>
+        </div>
+        <div class="col-12">
+          <input id="rf-coursework"  class="form-control form-control-sm" placeholder="Relevant coursework (comma-separated)"/>
+        </div>
+        <div class="col-12">
+          <input id="rf-achievement" class="form-control form-control-sm" placeholder="Academic achievement"/>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="rf-section-header d-flex justify-content-between align-items-center">
+        <span>Technical Skills</span>
+        <button type="button" id="add-sg-btn" class="btn btn-xs rf-add-btn">+ Group</button>
+      </div>
+      <div id="skills-container" class="mb-3">
+        <!-- Starter skill groups -->
+        <div class="rf-skill-group d-flex gap-2 mb-2 align-items-start">
+          <input class="form-control form-control-sm rf-sg-name" value="Languages" style="max-width:160px"/>
+          <input class="form-control form-control-sm rf-sg-content" placeholder="Python, Java, C++…"/>
+          <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">✕</button>
+        </div>
+        <div class="rf-skill-group d-flex gap-2 mb-2 align-items-start">
+          <input class="form-control form-control-sm rf-sg-name" value="Libraries &amp; Frameworks" style="max-width:160px"/>
+          <input class="form-control form-control-sm rf-sg-content" placeholder="FastAPI, scikit-learn…"/>
+          <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">✕</button>
+        </div>
+        <div class="rf-skill-group d-flex gap-2 mb-2 align-items-start">
+          <input class="form-control form-control-sm rf-sg-name" value="Concepts" style="max-width:160px"/>
+          <input class="form-control form-control-sm rf-sg-content" placeholder="DSA, Concurrency…"/>
+          <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">✕</button>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="rf-section-header d-flex justify-content-between align-items-center">
+        <span>Experience</span>
+        <button type="button" id="add-job-btn" class="btn btn-xs rf-add-btn">+ Job</button>
+      </div>
+      <div id="jobs-container" class="mb-3">
+        <div class="rf-job card mb-2 p-3">
+          <div class="d-flex justify-content-between mb-2">
+            <strong class="small">Job 1</strong>
+            <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">Remove</button>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-job-title"    placeholder="Job title"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-job-company"  placeholder="Company"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-job-note"     placeholder="Company note"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-job-location" placeholder="Location"/>
+            </div>
+            <div class="col-12">
+              <input class="form-control form-control-sm rf-job-period"   placeholder="Period"/>
+            </div>
+          </div>
+          <div class="rf-bullet-list mb-1"></div>
+          <button type="button" class="btn btn-xs rf-add-btn add-bullet-btn">+ Bullet</button>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="rf-section-header d-flex justify-content-between align-items-center">
+        <span>Projects</span>
+        <button type="button" id="add-proj-btn" class="btn btn-xs rf-add-btn">+ Project</button>
+      </div>
+      <div id="projects-container" class="mb-3">
+        <div class="rf-project card mb-2 p-3">
+          <div class="d-flex justify-content-between mb-2">
+            <strong class="small">Project 1</strong>
+            <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">Remove</button>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-proj-name"   placeholder="Project name"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-proj-tech"   placeholder="Tech stack"/>
+            </div>
+            <div class="col-12">
+              <input class="form-control form-control-sm rf-proj-period" placeholder="Period"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-proj-github" placeholder="GitHub URL"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-proj-demo"   placeholder="Live Demo URL"/>
+            </div>
+          </div>
+          <div class="rf-bullet-list mb-1"></div>
+          <button type="button" class="btn btn-xs rf-add-btn add-bullet-btn">+ Bullet</button>
+        </div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div class="rf-section-header d-flex justify-content-between align-items-center">
+        <span>Achievements</span>
+        <button type="button" id="add-ach-btn" class="btn btn-xs rf-add-btn">+ Entry</button>
+      </div>
+      <div id="achievements-container" class="mb-3">
+        <div class="rf-achievement card mb-2 p-3">
+          <div class="d-flex justify-content-between mb-2">
+            <strong class="small">Entry 1</strong>
+            <button type="button" class="btn btn-xs btn-outline-danger rf-remove-btn">Remove</button>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-ach-title"    placeholder="Title"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-ach-subtitle" placeholder="Subtitle"/>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm rf-ach-period"   placeholder="Period"/>
+            </div>
+          </div>
+          <div class="rf-bullet-list mb-1"></div>
+          <button type="button" class="btn btn-xs rf-add-btn add-bullet-btn">+ Bullet</button>
+        </div>
+      </div>
+
+    </form>
+  </aside>
+
+  <!-- ── CENTRE: Live XSLT preview ────────────────────────────────── -->
+  <main class="rf-preview-panel">
+    <div class="rf-preview-header">Live Preview</div>
+    <div id="rf-preview" class="rf-preview-body"></div>
+  </main>
+
+</div>
+
+<script type="module" src="../js/builder.js"></script>
+</body>
+</html>
