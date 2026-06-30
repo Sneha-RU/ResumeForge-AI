@@ -37,6 +37,13 @@ export function loginUser(name, email) {
     saveDB(db);
 }
 
+export function registerUser(name, email, password) {
+    const db = getDB();
+    // Register user and set active session
+    db.currentUser = { name, email };
+    saveDB(db);
+}
+
 export function logoutUser() {
     const db = getDB();
     db.currentUser = null;

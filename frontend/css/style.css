@@ -1,14 +1,43 @@
-:root {
-  --primary: #121312; 
-  --primary-hover: #2a2c2a;
-  --dark-bg: #121312;
-  --bg-color: #f6f7f6; 
-  --surface: #ffffff;
-  --text-primary: #121312;
-  --text-secondary: #747672;
-  --border-color: rgba(18, 19, 18, 0.08); 
-  --box-shadow-soft: 0 12px 36px rgba(18, 19, 18, 0.03), 0 2px 8px rgba(18, 19, 18, 0.02);
-  --box-shadow-hover: 0 20px 48px rgba(18, 19, 18, 0.06), 0 8px 16px rgba(18, 19, 18, 0.03);
+/* LIGHT THEME (Default) */
+:root, [data-theme="light"] {
+  --primary: #4f7942; 
+  --primary-hover: #3d5e34;
+  --dark-bg: #1f2a1c;
+  --bg-color: #f3f6f0; 
+  --surface: #fffefb;
+  --text-primary: #1f2a1c;
+  --text-secondary: #5b6657;
+  --border-color: #d8e0d0; 
+  --box-shadow-soft: 0 12px 36px rgba(31, 42, 28, 0.05), 0 2px 8px rgba(31, 42, 28, 0.03);
+  --box-shadow-hover: 0 20px 48px rgba(31, 42, 28, 0.08), 0 8px 16px rgba(31, 42, 28, 0.04);
+  
+  --ats-gauge-bg: var(--border-color);
+  --ats-circle: #4f7942;
+  --badge-bg: #e3ebdc;
+  
+  --nav-bg: rgba(246, 247, 246, 0.85);
+  --body-glow: rgba(201, 218, 184, 0.5);
+}
+
+/* DARK THEME */
+:root[data-theme="dark"] {
+  --primary: #c9dab8; 
+  --primary-hover: #e3ebdc;
+  --dark-bg: #0f140e;
+  --bg-color: #1a2217; 
+  --surface: #253122;
+  --text-primary: #f3f6f0;
+  --text-secondary: #aebfab;
+  --border-color: #3b4d37; 
+  --box-shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.15);
+  
+  --ats-gauge-bg: var(--border-color);
+  --ats-circle: #c9dab8;
+  --badge-bg: #3b4d37;
+  
+  --nav-bg: rgba(26, 34, 23, 0.85);
+  --body-glow: rgba(79, 121, 66, 0.15);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -34,14 +63,14 @@ body::before {
   left: 10vw;
   width: 80vw;
   height: 80vw;
-  background: radial-gradient(circle, rgba(230,245,180,0.5) 0%, rgba(255,255,255,0) 65%);
+  background: radial-gradient(circle, var(--body-glow) 0%, rgba(255,255,255,0) 65%);
   filter: blur(60px);
   z-index: -1;
   pointer-events: none;
 }
 
 .rf-navbar { 
-  background: rgba(246, 247, 246, 0.85) !important;
+  background: var(--nav-bg) !important;
   border-bottom: 1px solid var(--border-color) !important;
   box-shadow: 0 4px 16px rgba(18, 19, 18, 0.04) !important;
   height: 60px;
@@ -59,16 +88,16 @@ body::before {
 
 .rf-ai-badge {
   font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  background-color: rgba(230,245,180,1);
+  background-color: var(--badge-bg);
   color: var(--primary);
   padding: 2px 6px; border-radius: 6px;
   vertical-align: middle;
-  border: 1px solid rgba(230,245,180,1);
+  border: 1px solid var(--badge-bg);
 }
 
 .rf-layout {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   height: calc(100vh - 60px);
   overflow: hidden;
 }
@@ -103,6 +132,10 @@ body::before {
   box-shadow: 0 0 0 1px var(--primary);
   outline: none;
 }
+.form-control::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.6 !important;
+}
 
 /* Cards for repeatable items */
 .rf-job, .rf-project, .rf-achievement, .rf-skill-group {
@@ -127,7 +160,7 @@ body::before {
 }
 .rf-preview-header {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(246, 247, 246, 0.85); 
+  background: var(--nav-bg); 
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-color);
   font-size: 11px; font-weight: 600; text-transform: uppercase;
@@ -252,7 +285,7 @@ body::before {
   display: inline-block; font-size: 10px; font-weight: 500;
   padding: 2px 7px; border-radius: 10px;
 }
-.kw-green { background: rgba(230,245,180,1); color: var(--primary); }
+.kw-green { background: var(--badge-bg); color: var(--primary); }
 .kw-red   { background: #FCEBEB; color: #791F1F; }
 
 .rf-export-btn {
@@ -303,4 +336,32 @@ body::before {
   .rf-layout { grid-template-columns: 1fr; height: auto; }
   .rf-ats-panel { border-left: none; border-top: 1px solid var(--border-color); }
   .rf-preview-doc { width: 100%; padding: 20px; }
+}
+
+/* Hand-Drawn Theme Toggle */
+.rf-theme-toggle {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary) !important;
+  outline: none !important;
+  transition: transform 0.2s ease;
+  width: 32px;
+  height: 32px;
+}
+.rf-theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+.rf-theme-toggle:active {
+  transform: scale(0.9);
+}
+.rf-theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-primary);
 }

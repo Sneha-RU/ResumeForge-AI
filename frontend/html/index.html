@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home - ResumeForge AI</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/style.css?v=2.1"/>
+  <script src="../js/theme.js?v=2.1"></script>
   <style>
-    body { display: flex; flex-direction: column; min-height: 100vh; background-color: var(--dark-bg); color: var(--text-primary); }
+    body { display: flex; flex-direction: column; min-height: 100vh; background-color: var(--bg-color); color: var(--text-primary); }
     .home-container { flex: 1; padding: 3rem 1rem; max-width: 900px; margin: 0 auto; width: 100%; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
     .nav-card { background: var(--surface); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; text-align: center; text-decoration: none; color: inherit; transition: all 0.2s; cursor: pointer; }
@@ -22,27 +23,75 @@
   <div class="d-flex align-items-center gap-3">
     <span id="user-greeting" class="text-secondary small fw-semibold"></span>
     <button id="logout-btn" class="btn btn-sm rf-export-btn">Logout</button>
+    <button id="theme-toggle" class="rf-theme-toggle"></button>
   </div>
 </nav>
 
 <div class="home-container">
-  <h2 class="fw-bold mb-1">Dashboard</h2>
-  <p class="text-secondary">What would you like to do today?</p>
+  <!-- Hero Section -->
+  <div class="d-flex align-items-center justify-content-between mb-5 flex-wrap gap-4">
+    <div style="max-width: 400px;">
+      <h1 class="fw-bold mb-2" style="font-size: 2.5rem; letter-spacing: -1px; color: var(--text-primary);">Your Career Workspace</h1>
+      <p class="text-secondary mb-4" style="font-size: 1.1rem; line-height: 1.5;">Build a professional resume, optimize it for ATS software, and land your dream job faster.</p>
+      <a href="builder.html" class="btn rf-export-btn me-2" style="padding: 10px 20px; font-size: 14px;">Create New Resume</a>
+      <a href="ats.html" class="btn btn-outline-secondary" style="border-radius: 98px; padding: 10px 20px; font-size: 14px;">Scan with AI</a>
+    </div>
+    <div class="hero-image" style="flex: 1; max-width: 400px; min-width: 300px;">
+      <img id="dashboard-hero-img" src="../img/dashboard_hero_light.png" alt="Resume and ATS Gauge Illustration" style="width: 100%; border-radius: 24px; box-shadow: var(--box-shadow-hover); border: 1px solid var(--border-color); object-fit: cover; background: var(--surface);">
+    </div>
+  </div>
   
-  <div class="card-grid">
+  <!-- Quick Actions -->
+  <h5 class="fw-bold mb-3" style="color: var(--text-primary);">Quick Actions</h5>
+  <div class="card-grid mb-5" style="margin-top: 0;">
     <a href="profile.html" class="nav-card">
       <h5>Profile</h5>
-      <p>View your details and saved resumes.</p>
+      <p>Manage your details.</p>
     </a>
     <a href="builder.html" class="nav-card">
       <h5>Build Resume</h5>
-      <p>Create or edit a resume with live preview.</p>
+      <p>Live preview editor.</p>
     </a>
     <a href="ats.html" class="nav-card">
       <h5>Check ATS Score</h5>
-      <p>Analyze your resume against a job description.</p>
+      <p>Analyze alignment.</p>
     </a>
   </div>
+
+  <!-- Recent Documents -->
+  <h5 class="fw-bold mb-3" style="color: var(--text-primary);">Recent Documents</h5>
+  <div class="recent-list d-flex flex-column gap-3">
+    
+    <div class="d-flex justify-content-between align-items-center p-3" style="background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; transition: all 0.2s;">
+      <div class="d-flex align-items-center gap-3">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 20px;">📄</div>
+        <div>
+          <h6 class="mb-0 fw-bold" style="color: var(--text-primary);">Senior Software Engineer</h6>
+          <span class="text-secondary" style="font-size: 11px;">Updated 2 hours ago</span>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="rf-ai-badge">ATS 92%</span>
+        <button class="btn btn-sm btn-outline-secondary" style="border-radius: 98px; font-size: 12px;">Edit</button>
+      </div>
+    </div>
+    
+    <div class="d-flex justify-content-between align-items-center p-3" style="background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; transition: all 0.2s;">
+      <div class="d-flex align-items-center gap-3">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 20px;">📄</div>
+        <div>
+          <h6 class="mb-0 fw-bold" style="color: var(--text-primary);">Frontend Developer</h6>
+          <span class="text-secondary" style="font-size: 11px;">Updated 3 days ago</span>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="rf-ai-badge" style="background: #FCEBEB; color: #791F1F; border-color: #FCEBEB;">ATS 65%</span>
+        <button class="btn btn-sm btn-outline-secondary" style="border-radius: 98px; font-size: 12px;">Edit</button>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <script type="module">
