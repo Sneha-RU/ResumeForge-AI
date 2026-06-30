@@ -5,7 +5,6 @@
  * Compile:  tsc  (see tsconfig.json)
  */
 const API_BASE = ""; // same origin — FastAPI serves both API and frontend
-// ── API calls ─────────────────────────────────────────────────────────────
 /**
  * POST /analyze
  * Send plain-text resume + job description, receive ATS score.

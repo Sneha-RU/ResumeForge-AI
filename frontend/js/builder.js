@@ -15,19 +15,16 @@ import { XSLTRenderer } from "./xslt_renderer.js";
 import { exportPDF } from "./api_client.js";
 import { getCurrentUser, saveDraftHTML, getDraftHTML, saveResume } from "./db.js";
 
-// ── DOM references ────────────────────────────────────────────────────────
 const previewPane = document.getElementById("rf-preview");
 const exportBtn = document.getElementById("rf-export-btn");
 const saveBtn = document.getElementById("rf-save-btn");
 const syncStatus = document.getElementById("auto-sync-status");
 const form = document.getElementById("rf-form");
 
-// ── Core instances ────────────────────────────────────────────────────────
 const xml = new XMLManager();
 const renderer = new XSLTRenderer();
 let syncTimer = null;
 
-// ── Initialise ────────────────────────────────────────────────────────────
 async function init() {
     const user = getCurrentUser();
     if (!user) {
@@ -81,12 +78,10 @@ async function init() {
         }
     });
 }
-// ── Preview ───────────────────────────────────────────────────────────────
 function updatePreview() {
     const xmlString = xml.buildXML();
     renderer.render(xmlString, previewPane);
 }
-// ── PDF export ────────────────────────────────────────────────────────────
 async function handleExport() {
     exportBtn.disabled = true;
     const originalText = exportBtn.textContent;
@@ -104,7 +99,6 @@ async function handleExport() {
         setTimeout(() => { exportBtn.textContent = originalText; }, 3000);
     }
 }
-// ── Dynamic rows ──────────────────────────────────────────────────────────
 /**
  * Bind all "Add …" and "Remove" buttons for repeatable sections
  * (jobs, projects, achievements, skill groups, bullets).
@@ -183,7 +177,6 @@ function _bindAddBullet(btn) {
         row.querySelector("textarea").focus();
     });
 }
-// ── HTML templates for dynamic rows ──────────────────────────────────────
 function _jobTemplate() {
     return `
   <div class="rf-job card mb-2 p-3">
@@ -244,6 +237,5 @@ function _skillGroupTemplate() {
     <button type="button" class="btn btn-sm btn-outline-danger rf-remove-btn">✕</button>
   </div>`;
 }
-// ── Boot ──────────────────────────────────────────────────────────────────
 init().catch(console.error);
 //# sourceMappingURL=builder.js.map

@@ -134,7 +134,6 @@ export class ATSChecker {
       </div>`;
   }
 
-  // ── Private ──────────────────────────────────────────────────────────────
 
   private _showPlaceholder(): void {
     this.panel.innerHTML = `

@@ -16,13 +16,11 @@ import { XSLTRenderer } from "./xslt_renderer.js";
 import { ATSChecker }   from "./ats_checker.js";
 import { analyzeResume, exportPDF } from "./api_client.js";
 
-// ── DOM references ────────────────────────────────────────────────────────
 
 const previewPane    = document.getElementById("rf-preview")!;
 const exportBtn      = document.getElementById("rf-export-btn")  as HTMLButtonElement;
 const exportStatus   = document.getElementById("rf-export-status")!;
 
-// ── Core instances ────────────────────────────────────────────────────────
 
 const xml      = new XMLManager();
 const renderer = new XSLTRenderer();
@@ -42,7 +40,6 @@ const ats = new ATSChecker(
   }
 );
 
-// ── Initialise ────────────────────────────────────────────────────────────
 
 async function init(): Promise<void> {
   // Load XSLT stylesheet (one-time fetch)
@@ -63,14 +60,12 @@ async function init(): Promise<void> {
   _bindDynamicControls();
 }
 
-// ── Preview ───────────────────────────────────────────────────────────────
 
 function updatePreview(): void {
   const xmlString = xml.buildXML();
   renderer.render(xmlString, previewPane);
 }
 
-// ── PDF export ────────────────────────────────────────────────────────────
 
 async function handleExport(): Promise<void> {
   exportBtn.disabled = true;
@@ -90,7 +85,6 @@ async function handleExport(): Promise<void> {
   }
 }
 
-// ── Dynamic rows ──────────────────────────────────────────────────────────
 
 /**
  * Bind all "Add …" and "Remove" buttons for repeatable sections
@@ -178,7 +172,6 @@ function _bindAddBullet(btn: HTMLButtonElement): void {
   });
 }
 
-// ── HTML templates for dynamic rows ──────────────────────────────────────
 
 function _jobTemplate(): string {
   return `
@@ -244,6 +237,5 @@ function _skillGroupTemplate(): string {
   </div>`;
 }
 
-// ── Boot ──────────────────────────────────────────────────────────────────
 
 init().catch(console.error);

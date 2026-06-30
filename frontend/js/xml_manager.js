@@ -18,7 +18,6 @@ export class XMLManager {
         const parts = [
             '<?xml version="1.0" encoding="UTF-8"?>',
             "<resume>",
-            // ── personal ──────────────────────────────────────────
             "  <personal>",
             `    <name>${e("rf-name")}</name>`,
             `    <email>${e("rf-email")}</email>`,
@@ -26,7 +25,6 @@ export class XMLManager {
             `    <linkedin>${e("rf-linkedin")}</linkedin>`,
             `    <github>${e("rf-github")}</github>`,
             "  </personal>",
-            // ── education ──────────────────────────────────────────
             "  <education>",
             `    <degree>${e("rf-degree")}</degree>`,
             `    <institution>${e("rf-institution")}</institution>`,
@@ -36,19 +34,15 @@ export class XMLManager {
             `    <coursework>${e("rf-coursework")}</coursework>`,
             `    <achievement>${e("rf-achievement")}</achievement>`,
             "  </education>",
-            // ── skills ─────────────────────────────────────────────
             "  <skills>",
             ...this._skillGroups(),
             "  </skills>",
-            // ── experience ─────────────────────────────────────────
             "  <experience>",
             ...this._jobEntries(),
             "  </experience>",
-            // ── projects ───────────────────────────────────────────
             "  <projects>",
             ...this._projectEntries(),
             "  </projects>",
-            // ── achievements ───────────────────────────────────────
             "  <achievements>",
             ...this._achievementEntries(),
             "  </achievements>",
@@ -71,7 +65,6 @@ export class XMLManager {
             .replace(/\s+/g, " ")
             .trim();
     }
-    // ── Private helpers ────────────────────────────────────────────────────
     /** Read all skill-group inputs (name + content). */
     _skillGroups() {
         const lines = [];

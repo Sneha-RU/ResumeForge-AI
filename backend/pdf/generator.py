@@ -51,7 +51,6 @@ class PDFGenerator:
         html = self._render_html(data)
         return WeasyHTML(string=html).write_pdf()
 
-    # ── Private ────────────────────────────────────────────────────────────
 
     def _parse_xml(self, xml_string: str) -> dict:
         """

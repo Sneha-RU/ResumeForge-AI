@@ -1,21 +1,3 @@
-"""
-ResumeForge AI — FastAPI Backend
-=================================
-Routes
-------
-POST /analyze      TF-IDF + spaCy NER → match score + keyword gaps
-POST /export-pdf   XML resume data     → WeasyPrint PDF bytes
-GET  /health       Service health check
-
-Static files (frontend) are served from ../frontend/html at root /.
-
-Startup
--------
-    uvicorn main:app --reload --port 8000
-    # or for Railway:
-    uvicorn main:app --host 0.0.0.0 --port $PORT
-"""
-
 import os
 import sys
 from contextlib import asynccontextmanager
@@ -34,7 +16,6 @@ from ml.extractor import KeywordExtractor
 from pdf.generator import PDFGenerator
 
 
-# ── Startup / shutdown ─────────────────────────────────────────────────────
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -49,7 +30,6 @@ async def lifespan(app: FastAPI):
     print("Shutting down.")
 
 
-# ── App ────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
     title="ResumeForge AI",
@@ -67,7 +47,6 @@ app.add_middleware(
 )
 
 
-# ── Request / Response models ──────────────────────────────────────────────
 
 class AnalyzeRequest(BaseModel):
     resume_text: str = Field(..., min_length=10,
@@ -85,7 +64,6 @@ class ExportRequest(BaseModel):
     resume_xml: str = Field(..., description="Full XML string from the builder form")
 
 
-# ── Routes ─────────────────────────────────────────────────────────────────
 
 @app.get("/health")
 def health():
@@ -96,13 +74,7 @@ def health():
 def analyze(req: AnalyzeRequest, request: Request):
     """
     Compute the semantic match between a resume and a job description.
-
-    Steps
-    -----
-    1. ATSScorer  → TF-IDF vectorise both texts, cosine similarity score
-    2. Extractor  → spaCy NER on the JD, compare noun tokens against resume
-    3. Return score, matched keywords, missing keywords, grade
-    """
+"""
     scorer    = request.app.state.scorer
     extractor = request.app.state.extractor
 
@@ -167,14 +139,7 @@ def analyze_upload(
 def export_pdf(req: ExportRequest, request: Request):
     """
     Convert the XML resume string to a print-ready PDF.
-
-    Steps
-    -----
-    1. Parse XML → Python dict
-    2. Render Jinja2 HTML template with resume data
-    3. WeasyPrint converts HTML → PDF bytes
-    4. Return as application/pdf with download header
-    """
+"""
     generator = request.app.state.pdf_gen
 
     try:
@@ -189,7 +154,6 @@ def export_pdf(req: ExportRequest, request: Request):
     )
 
 
-# ── Serve frontend static files ────────────────────────────────────────────
 # Must be mounted AFTER all API routes so /analyze and /export-pdf
 # are matched first.
 

@@ -104,7 +104,6 @@ export class ATSChecker {
         <p>⚠ ${message}</p>
       </div>`;
     }
-    // ── Private ──────────────────────────────────────────────────────────────
     _showPlaceholder() {
         this.panel.innerHTML = `
       <div class="ats-placeholder">

@@ -1,4 +1,3 @@
-/* ─── Variables & Base ─────────────────────────────────────────────── */
 :root {
   --primary: #121312; 
   --primary-hover: #2a2c2a;
@@ -41,7 +40,6 @@ body::before {
   pointer-events: none;
 }
 
-/* ─── Navbar ────────────────────────────────────────────────────── */
 .rf-navbar { 
   background: rgba(246, 247, 246, 0.85) !important;
   border-bottom: 1px solid var(--border-color) !important;
@@ -68,7 +66,6 @@ body::before {
   border: 1px solid rgba(230,245,180,1);
 }
 
-/* ─── Three-panel layout ────────────────────────────────────────── */
 .rf-layout {
   display: grid;
   grid-template-columns: 380px 1fr;
@@ -76,7 +73,6 @@ body::before {
   overflow: hidden;
 }
 
-/* ─── Form panel (left) ─────────────────────────────────────────── */
 .rf-form-panel {
   overflow-y: auto;
   padding: 14px 12px;
@@ -124,7 +120,6 @@ body::before {
   padding: 8px;
 }
 
-/* ─── Preview panel (centre) ────────────────────────────────────── */
 .rf-preview-panel {
   overflow-y: auto;
   background: transparent;
@@ -143,7 +138,6 @@ body::before {
   display: flex; justify-content: center;
 }
 
-/* ── XSLT preview document ─────────────────────────────────────── */
 .rf-preview-doc {
   background: #fff;
   width: 680px; max-width: 100%;
@@ -188,7 +182,6 @@ body::before {
 .rfp-links { font-size: 9pt; color: var(--primary); padding-left: 10pt; margin-top: 1pt; }
 .rfp-links a { color: var(--primary); font-weight: 500; }
 
-/* ─── ATS panel (right) ─────────────────────────────────────────── */
 .rf-ats-panel {
   overflow-y: auto;
   background: var(--surface);
@@ -213,7 +206,6 @@ body::before {
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
-/* ── ATS result elements ───────────────────────────────────────── */
 .ats-panel { font-size: 12px; }
 .ats-placeholder, .ats-loading, .ats-error {
   padding: 20px 10px; text-align: center; color: var(--text-secondary); font-size: 12px;
@@ -227,7 +219,6 @@ body::before {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Score gauge ───────────────────────────────────────────────── */
 .ats-gauge-row { display: flex; align-items: center; gap: 12px; padding: 10px 4px 6px; }
 .ats-gauge { width: 80px; flex-shrink: 0; }
 .ats-circle-svg { display: block; width: 100%; }
@@ -251,7 +242,6 @@ body::before {
 }
 .ats-suggestion { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
 
-/* ── Keyword sections ──────────────────────────────────────────── */
 .ats-kw-section { padding: 6px 4px; border-top: 1px solid var(--border-color); }
 .ats-kw-label   { font-size: 11px; font-weight: 600; margin-bottom: 5px; color: var(--text-primary); }
 .ats-kw-matched { color: var(--text-primary); }
@@ -265,7 +255,6 @@ body::before {
 .kw-green { background: rgba(230,245,180,1); color: var(--primary); }
 .kw-red   { background: #FCEBEB; color: #791F1F; }
 
-/* ─── Export button & status ────────────────────────────────────── */
 .rf-export-btn {
   background-color: var(--surface);
   color: var(--text-primary);
@@ -286,7 +275,6 @@ body::before {
 .export-error   { color: #791F1F; }
 .export-loading { color: var(--text-secondary); }
 
-/* ─── Utility ───────────────────────────────────────────────────── */
 .btn-xs { font-size: 11px; padding: 2px 8px; border-radius: 98px; }
 .rf-add-btn { 
   background: var(--surface); color: var(--text-primary); border: 1px solid var(--border-color); font-size: 11px; transition: all 0.3s;
@@ -308,11 +296,9 @@ body::before {
   border-color: var(--primary);
 }
 
-/* ─── Scrollbar ─────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 
-/* ─── Responsive: stack on narrow screens ───────────────────────── */
 @media (max-width: 900px) {
   .rf-layout { grid-template-columns: 1fr; height: auto; }
   .rf-ats-panel { border-left: none; border-top: 1px solid var(--border-color); }

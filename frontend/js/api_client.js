@@ -7,7 +7,6 @@
 const API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && window.location.port !== "8000"
     ? "http://localhost:8000" // Local dev where frontend is on port 5500
     : "";                     // Production where frontend is served by FastAPI
-// ── API calls ─────────────────────────────────────────────────────────────
 /**
  * POST /analyze
  * Send plain-text resume + job description, receive ATS score.

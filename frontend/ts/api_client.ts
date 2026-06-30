@@ -7,7 +7,6 @@
 
 const API_BASE = "http://localhost:8000";   // Pointing to FastAPI backend
 
-// ── Response types ────────────────────────────────────────────────────────
 
 export interface AnalyzeResponse {
   match_score:       number;       // 0–100
@@ -16,7 +15,6 @@ export interface AnalyzeResponse {
   grade:             "A" | "B" | "C" | "D";
 }
 
-// ── API calls ─────────────────────────────────────────────────────────────
 
 /**
  * POST /analyze

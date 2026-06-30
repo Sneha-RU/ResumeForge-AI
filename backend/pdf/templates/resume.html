@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <style>
-/* ── Page setup ─────────────────────────────────────────── */
 @page {
   size: letter;
   margin: 0.60in 0.72in 0.60in 0.72in;
 }
 
-/* ── Reset ──────────────────────────────────────────────── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -19,7 +17,6 @@ body {
   line-height: 1.35;
 }
 
-/* ── Name / header ──────────────────────────────────────── */
 .name {
   font-size: 22pt;
   font-variant: small-caps;
@@ -38,7 +35,6 @@ body {
 .contact a { color: #333; text-decoration: none; }
 .contact span { margin: 0 5pt; }
 
-/* ── Section heading ────────────────────────────────────── */
 .section-title {
   font-size: 11pt;
   font-weight: bold;
@@ -50,7 +46,6 @@ body {
   margin-bottom: 4pt;
 }
 
-/* ── Two-column row (name + date) ───────────────────────── */
 .row {
   display: table;
   width: 100%;
@@ -62,7 +57,6 @@ body {
 .entry-title   { font-weight: bold; font-size: 10.5pt; }
 .entry-sub     { font-style: italic; font-size: 9.5pt; color: #333; }
 
-/* ── Bullet list ────────────────────────────────────────── */
 ul.bullets {
   list-style-type: none;
   padding-left: 10pt;
@@ -82,25 +76,20 @@ ul.bullets li::before {
   left: 0;
 }
 
-/* ── Skills table ───────────────────────────────────────── */
 .skill-row { margin-bottom: 1.5pt; font-size: 9.8pt; }
 .skill-label { font-weight: bold; }
 
-/* ── Project title row ──────────────────────────────────── */
 .proj-title { font-weight: bold; }
 .proj-tech  { font-style: italic; font-size: 9.5pt; }
 
-/* ── Project links ──────────────────────────────────────── */
 .proj-links { font-size: 9pt; color: #1a5fa8; }
 .proj-links a { color: #1a5fa8; text-decoration: underline; }
 
-/* ── Keep sections together where possible ──────────────── */
 .entry { page-break-inside: avoid; margin-bottom: 4pt; }
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ───────────────────────────────────────────── -->
 <div class="name">{{ personal.name }}</div>
 <div class="contact">
   {% if personal.email %}
@@ -117,7 +106,6 @@ ul.bullets li::before {
   {% endif %}
 </div>
 
-<!-- ── EDUCATION ────────────────────────────────────────── -->
 {% if education.institution %}
 <div class="section-title">Education</div>
 <div class="entry">
@@ -146,7 +134,6 @@ ul.bullets li::before {
 </div>
 {% endif %}
 
-<!-- ── TECHNICAL SKILLS ─────────────────────────────────── -->
 {% if skills %}
 <div class="section-title">Technical Skills</div>
 <div class="entry">
@@ -159,7 +146,6 @@ ul.bullets li::before {
 </div>
 {% endif %}
 
-<!-- ── EXPERIENCE ───────────────────────────────────────── -->
 {% if experience %}
 <div class="section-title">Experience</div>
 {% for job in experience %}
@@ -190,7 +176,6 @@ ul.bullets li::before {
 {% endfor %}
 {% endif %}
 
-<!-- ── PROJECTS ─────────────────────────────────────────── -->
 {% if projects %}
 <div class="section-title">Projects</div>
 {% for proj in projects %}
@@ -222,7 +207,6 @@ ul.bullets li::before {
 {% endfor %}
 {% endif %}
 
-<!-- ── ACHIEVEMENTS ─────────────────────────────────────── -->
 {% if achievements %}
 <div class="section-title">Achievements &amp; Extracurriculars</div>
 {% for item in achievements %}

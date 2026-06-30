@@ -76,26 +76,22 @@ class KeywordExtractor:
 
         keywords: set[str] = set()
 
-        # ── spaCy token POS ──────────────────────────────────────────────
         for token in doc:
             if token.pos_ in ("NOUN", "PROPN") and not token.is_stop:
                 word = token.lemma_.lower().strip()
                 if len(word) >= min_length and word.isalpha():
                     keywords.add(word)
 
-        # ── spaCy named entities ─────────────────────────────────────────
         for ent in doc.ents:
             if ent.label_ in ("ORG", "PRODUCT", "LANGUAGE", "GPE"):
                 phrase = ent.text.strip().lower()
                 if len(phrase) >= min_length:
                     keywords.add(phrase)
 
-        # ── Tech supplement ──────────────────────────────────────────────
         for term in _TECH_SUPPLEMENT:
             if term in text_lower:
                 keywords.add(term)
 
-        # ── Multi-word phrases (bigrams in supplement) ───────────────────
         # Find supplement phrases that are 2+ words and appear in text.
         for term in _TECH_SUPPLEMENT:
             if " " in term and term in text_lower:

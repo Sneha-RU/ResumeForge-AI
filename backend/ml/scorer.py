@@ -78,7 +78,6 @@ class ATSScorer:
         ranked = sorted(zip(feature_names, scores), key=lambda x: -x[1])
         return [term for term, _ in ranked[:top_n]]
 
-    # ── Private ────────────────────────────────────────────────────────────
 
     @staticmethod
     def _preprocess(text: str) -> str:
